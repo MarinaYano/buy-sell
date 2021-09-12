@@ -1,0 +1,67 @@
+<h1>アイテム詳細</h1>
+<h3></h3>
+<div class="item">
+    <p><%= @item.post_genre %></p>
+    <p><%= @item.item_genre %></p>
+    <p><%= @item.price %></p>
+    <p><%= @item.status %></p>
+    <p><%= @item.memo %></p>
+    <p><%= @item.created_at %></p>
+  
+
+    <% if user_signed_in? %>
+        <% if current_user.already_liked?(@item) %>
+            <%= link_to item_like_path(@item), method: :delete do %>
+              <i class="fas fa-heart"></i><%= @item.likes.count %>
+            <% end %>
+        <% else %>
+            <%= link_to item_likes_path(@item), method: :post do %>
+              <i class="far fa-heart"></i><%= @item.likes.count %>
+            <% end %>
+          <% end %>
+        <% else %>
+              <i class="far fa-heart"></i><%= @item.likes.count %>
+    <% end %>
+
+</div>
+
+<h2>いいねしたユーザー</h2>
+<% @item.liked_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+
+
+  
+<div class="comment-wrapper">
+  <p>コメント一覧</p>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.email unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+    <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@item, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<% @item.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+<% end %>
+
+
+  
+<%= link_to "DMを送る", users_path %>
+<%= link_to "編集する", edit_item_path %>
+<%= button_to "削除する", item_path, method: :delete %>
+<%= link_to "アイテム一覧に戻る", items_path %>
+
+

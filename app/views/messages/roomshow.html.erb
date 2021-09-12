@@ -1,0 +1,38 @@
+<div class="flex flex-col">
+  <%
+  @messages.each do |message|
+  %>
+    <% if message.to_user_id == current_user.id %>
+    <div class="flex flex-row mb-8">
+      <div class="flex items-center justify-center h-10 w-10 rounded-full bg-white flex-shrink-0">
+        <%= image_tag('default_icon.png',class: "mx-auto object-cover rounded-full h-10 w-10",alt: "ユーザーアイコン") %>
+      </div>
+      <div class="ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+        <p>
+          <%= message.content %>
+        </p>
+      </div>
+    </div>
+    <% else %>
+    <div class="flex flex-row-reverse mb-8">
+      <div class="flex items-center justify-center h-10 w-10 rounded-full bg-white flex-shrink-0">
+        <%= image_tag('default_icon.png',class: "mx-auto object-cover rounded-full h-10 w-10",alt: "ユーザーアイコン") %>
+      </div>
+      <div class="ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+        <p>
+          <%= message.content %>
+        </p>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_with model: @message, url: messages_path do |form| %>
+<div class="">
+  <%= form.text_area :content, id: "content", rows: "4", class: "form_textarea mb-4" %>
+</div>
+<%= form.text_area :user_id, class: "hidden", value: current_user.id %>
+<%= form.text_area :to_user_id, class: "hidden", value: @to_user_id %>
+<%= form.submit "メッセージ送信", class: "btn_01" %>
+<% end %>

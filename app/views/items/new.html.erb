@@ -1,0 +1,72 @@
+<h1>バイセル</h1>
+<h3>新規アイテム</h3>
+<%= form_for @item do |f| %>
+  <div class="field">
+
+  <div class='form-group'>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+      <div class='form-check'>
+          <%= tag.label class: 'form-check-label' do %>
+              <%= tag.check_box class: 'form-check-input' %>
+              <%= tag.text %>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= f.label :取引形態 %>
+    <%= f.select :post_genre, 
+    [["selling", "selling"], 
+    ["rending", "rending"],
+    ["giving", "giving"], 
+    ["buying", "buying"]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :アイテムジャンル %>
+    <%= f.select :item_genre, 
+    [["テーブル", "テーブル"], 
+    ["ソファ", "ソファ"],
+    ["座椅子", "座椅子"],
+    ["服", "服"],
+    ["収納グッズ", "収納グッズ"],
+    ["調理器具", "調理器具"],
+    ["調味料", "調味料"],
+    ["電気ケトル", "電気ケトル"],
+    ["電子レンジ", "電子レンジ"], 
+    ["トースター", "トースター"],
+    ["炊飯器", "炊飯器"],
+    ["冷蔵庫", "冷蔵庫"],
+    ["洗濯機", "洗濯機"],
+    ["教科書", "教科書"],
+    ["その他", "その他"]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :アイテム画像 %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :値段 %>
+    <%= f.number_field :price, :size => 10 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :状態 %>
+    <%= f.select :status, 
+    [["未使用", "未使用"], 
+    ["良好", "良好"], 
+    ["やや古い", "やや古い"],
+    ["傷などが目立つ", "傷などが目立つ"]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="field">
+      <%= f.label :コメント %>
+      <%= f.text_field :memo, :size => 140 %>
+  </div>
+
+  <%= f.submit "アイテムを投稿する" %>
+<% end %>
+
+<%= link_to "アイテム一覧に戻る", items_path %>

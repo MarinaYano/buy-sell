@@ -1,0 +1,13 @@
+<%
+  @message_user_ids.each do |message_user_id|
+  message_user = User.find_by(id: message_user_id.user_id)
+  %>
+  <div class="border-gray-400 flex flex-row mb-2 bg-white">
+    <div class="flex flex-col w-10 h-10 justify-center items-center mr-4">
+      <%= image_tag('default_icon.png',class: "mx-auto object-cover rounded-full h-10 w-10",alt: "ユーザーアイコン") %>
+    </div>
+    <div class="">
+      <%= message_user.name %>
+    </div>
+  </div>
+  <% end %>

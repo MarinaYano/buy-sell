@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  post_genre: MyString
+  item_genre: MyString
+  price: MyString
+  status: MyString
+  memo: MyText
+
+two:
+  post_genre: MyString
+  item_genre: MyString
+  price: MyString
+  status: MyString
+  memo: MyText
