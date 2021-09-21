@@ -26,8 +26,10 @@
       <h1>バイセル</h1>
       <div class="header-list">
       <ul>
-        <li><%= link_to "ホーム", root_path %></li>
-        <li><%= link_to "新規投稿",new_item_path %></li>
+        <li><a href="/items" class="btn-flat-dashed-filled">ホーム</a></li>
+        <% if user_signed_in? %>
+        <li><a href="/items/new" class="btn-flat-dashed-filled">新規投稿</a></li>
+        <% end %>
     
       </ul>
       </div>
