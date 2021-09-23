@@ -1,9 +1,11 @@
-<h1>バイセル</h1>
+<%= stylesheet_link_tag "items_new", :media => "all" %>
+
 <h3>新規アイテム</h3>
 <%= form_for @item do |f| %>
-  <div class="field">
+
 
   <div class='form-group'>
+  <h4>カテゴリーを指定する</h4>
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
       <div class='form-check'>
           <%= tag.label class: 'form-check-label' do %>
@@ -14,12 +16,13 @@
     <% end %>
   </div>
 
-  <%= f.label :取引形態 %>
+  <div class="field">
+    <%= f.label :取引形態 %>
     <%= f.select :post_genre, 
-    [["selling", "selling"], 
-    ["rending", "rending"],
-    ["giving", "giving"], 
-    ["buying", "buying"]], include_blank: "選択して下さい" %>
+    [["売る", "売る"], 
+    ["貸す", "貸す"],
+    ["ゆずる", "ゆずる"], 
+    ["探している", "探している"]], include_blank: "選択して下さい" %>
   </div>
 
   <div class="field">
@@ -63,10 +66,8 @@
 
   <div class="field">
       <%= f.label :コメント %>
-      <%= f.text_field :memo, :size => 140 %>
+      <%= f.text_field :memo, :size => "80×30"%>
   </div>
 
-  <%= f.submit "アイテムを投稿する" %>
+  <%= f.submit "アイテムを投稿する" , class: 'post-btn' %>
 <% end %>
-
-<%= link_to "アイテム一覧に戻る", items_path %>

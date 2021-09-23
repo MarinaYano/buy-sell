@@ -10,27 +10,24 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <% if user_signed_in? %>
-    <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-    <% else %>
-    <li><%= link_to "新規登録", new_user_registration_path %></li>
-    <li><%= link_to "ログイン", new_user_session_path %></li>
-    <% end %>
   </head>
 
   <body>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
     <header>
-      <h1>バイセル</h1>
+    <div class="logo">
+　    <img src="/assets/logo.png">
+      <img src="/assets/font1.png">
+    </div>
+
       <div class="header-list">
       <ul>
-        <li><a href="/items" class="btn-flat-dashed-filled">ホーム</a></li>
-        <% if user_signed_in? %>
-        <li><a href="/items/new" class="btn-flat-dashed-filled">新規投稿</a></li>
-        <% end %>
-    
+        <li>
+        <%= link_to "新規登録", new_user_registration_path %>
+        <%= link_to "ログイン", new_user_session_path %>
+        <%= link_to "アイテム一覧", items_path %>
       </ul>
       </div>
     </header>
