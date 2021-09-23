@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
   
-  root 'items#index'
+  root 'items#home'
 
   devise_for :users
   resources :users, :only => [:index]
