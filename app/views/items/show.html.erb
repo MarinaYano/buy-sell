@@ -1,6 +1,7 @@
 <h1>アイテム詳細</h1>
 <h3></h3>
 <div class="item">
+    <%= @item.image %>
     <p><%= @item.post_genre %></p>
     <p><%= @item.item_genre %></p>
     <p><%= @item.price %></p>
@@ -22,8 +23,11 @@
         <% else %>
               <i class="far fa-heart"></i><%= @item.likes.count %>
     <% end %>
-
 </div>
+
+<% @item.tags.each do |tag| %>
+  <span><%= tag.name %></span>
+<% end %>
 
 <h2>いいねしたユーザー</h2>
 <% @item.liked_users.each do |user| %>
@@ -53,15 +57,11 @@
   <% end %>
 </div>
 
-<% @item.tags.each do |tag| %>
-    <span><%= tag.name %></span>
-<% end %>
 
 
-  
-<%= link_to "DMを送る", users_path %>
-<%= link_to "編集する", edit_item_path %>
-<%= button_to "削除する", item_path, method: :delete %>
-<%= link_to "アイテム一覧に戻る", items_path %>
+  <%= link_to "DMを送る", users_path %>
+  <%= link_to "編集する", edit_item_path %>
+  <%= button_to "削除する", item_path, method: :delete %>
+
 
 

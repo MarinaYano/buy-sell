@@ -26,6 +26,9 @@ header{
     color: #5d627b;
     background-color: #efe8d8;
 }
+.title{
+    text-align: center;
+}
 
 .research h1{
     margin: 0; 
@@ -35,6 +38,10 @@ header{
 .items-container{
     width: 50%;
     margin: 10px auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
 }
 
 h3 {
@@ -47,3 +54,18 @@ h3 {
     padding-left: 20px;
     background-color: #efe8d8;
 }
+
+.actions{
+    margin-left: 20px;
+}
+
+.research-btn{
+    padding: 5px 20px;
+    border-radius: 3px;
+}
+
+
+.pagination {
+    justify-content: center;
+  }
+  

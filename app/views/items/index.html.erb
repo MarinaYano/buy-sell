@@ -7,37 +7,42 @@
 
   <%= form_tag({controller:"items",action:"index"}, method: :get) do %>
     <%= text_field_tag :search %>
-    <%= submit_tag '検索'  %>
+    <%= submit_tag '検索' , class: "research-btn"  %>
   <% end %>
 </div>
 
 <div class="tag">
-  <h2>カテゴリーで検索する</h2>
+  <h3>カテゴリーで検索する</h3>
   <%= form_tag({controller:"items",action:"index"}, method: :get) do %>
     <% @tags.each do |t| %>
-        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+        <ul><%= check_box :tag_ids, t.name %><%= t.name %></ul>
     <% end %>
-    <%= submit_tag '検索' %>
+    <div class="actions">
+    <%= submit_tag '検索' , class: "research-btn" %>
+    </div>
   <% end %>
 
   
 </div>
 
-
-<div class="items-container">
+<div class="title">
 <h3>アイテム一覧</h3>
 <%= page_entries_info @items %>
+</div>
+
+<div class="items-container">
+
+
   <% @items.each do |t| %>
     <div class="item">
       <%= image_tag t.image_url, size: "250x200" if t.image? %>
-      <%= t.user.email %>
-      <%= t.post_genre %>
-      <%= t.item_genre %>
-      <%= t.price %>
-      <%= t.status %>
-      <%= t.memo %>
-      <a href="/users/<%= t.user.id %>"><%= t.user.name %></a>
-
+      <div class="item-main">
+        <%= t.post_genre %>
+        <%= t.item_genre %>
+        <%= t.price %>
+        <%= t.status %>
+        <%= t.memo %>
+      </div>
       <% if user_signed_in? %>
       <% if current_user.already_liked?(t) %>
           <%= link_to item_like_path(id: t.id, item_id: t.id), method: :delete do %>
@@ -63,4 +68,6 @@
   <% end %>
 </div>
 
-<%= paginate @items %>
+<div class="paginate">
+  <%= paginate @items, class: 'page' %>
+</div>

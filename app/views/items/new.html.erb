@@ -21,8 +21,8 @@
     <%= f.select :post_genre, 
     [["売る", "売る"], 
     ["貸す", "貸す"],
-    ["ゆずる", "ゆずる"], 
-    ["探している", "探している"]], include_blank: "選択して下さい" %>
+    ["譲る", "譲る"], 
+    ["探す", "探す"]], include_blank: "選択して下さい" %>
   </div>
 
   <div class="field">
@@ -68,6 +68,8 @@
       <%= f.label :コメント %>
       <%= f.text_field :memo, :size => "80×30"%>
   </div>
-
+  
+  <div class="actions">
   <%= f.submit "アイテムを投稿する" , class: 'post-btn' %>
+  </div>
 <% end %>
