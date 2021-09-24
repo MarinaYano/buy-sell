@@ -1,10 +1,11 @@
 <%= stylesheet_link_tag "sessions_new", :media => "all" %>
 
-<h2>ログイン</h2>
+
 
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
+    <h2>ログイン</h2>
     <p>
     <%= f.label :email, style: "border: none" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -28,10 +29,10 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
-    
+    <%= f.submit "Log in" , class: 'login-btn' %>
+  </div>
 
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+

@@ -73,3 +73,33 @@
       height:85px;
   }
 
+  .btn-flat-border-a {
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: white;
+    background: #dda448;
+    border: solid 2px #dda448;
+    border-radius: 3px;
+    transition: .4s;
+  }
+  
+  .btn-flat-border-a:hover {
+    background: #dda448;
+    color: black;
+  }
+
+  .btn-flat-border {
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #457d58;
+    border: solid 2px #457d58;
+    border-radius: 3px;
+    transition: .4s;
+  }
+  
+  .btn-flat-border:hover {
+    background: #457d58;
+    color: white;
+  }

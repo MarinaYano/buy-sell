@@ -25,10 +25,14 @@
       <div class="header-list">
       <ul>
         <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-        <%= link_to "ログイン", new_user_session_path %>
-        <%= link_to "アイテム一覧", items_path %>
-        <%= link_to "投稿", new_item_path %>
+        <a href="/users/sign_up" class="btn-flat-border-a">新規登録</a>
+        <a href="/users/sign_in" class="btn-flat-border">ログイン</a>
+        <a href="/items" class="btn-flat-border">アイテム一覧</a>
+        <% if user_signed_in? %>
+        <a href="/items/new" class="btn-flat-border">投稿する</a>
+        <%= link_to "マイページへ", user_path(current_user.id), class: "btn-flat-border" %>
+        <%= link_to "ログアウト", destroy_user_session_path, :method => :delete, class: "btn-flat-border" %>
+        <% end %>
       </ul>
       </div>
     </header>
@@ -37,5 +41,6 @@
     </main>
   </body>
 </html>
+
 
 
