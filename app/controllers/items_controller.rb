@@ -2,9 +2,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @items = Item.all.page(params[:page]).per(3)
+    @items = Item.all.page(params[:page]).per(5)
     @tags = Tag.all
-
+    
+    #フリーワード検索
     if params[:search] == nil
       @items= Item.all
     elsif params[:search] == ''
@@ -15,6 +16,7 @@ class ItemsController < ApplicationController
         @items = Item.joins(:user).where("post_genre LIKE ? OR memo LIKE ?", "%#{search}%", "%#{search}%")
     end
 
+    # タグ機能
     if params[:tag_ids]
       @items = []
       params[:tag_ids].each do |key, value|
@@ -29,7 +31,9 @@ class ItemsController < ApplicationController
       Tag.create(name: params[:tag])
     end
 
-    @items = @items.page(params[:page]).per(3)
+    @rank_items = Item.all.sort {|a,b| b.liked_users.count <=> a.liked_users.count}
+
+    @items = @items.page(params[:page]).per(5)
   end
 
   def new
@@ -74,7 +78,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:post_genre, :item_genre, :price, :status, :memo, :image, tag_ids: [])
+    params.require(:item).permit(:overall,:level, :post_genre, :item_genre, :price, :status, :memo, :image, tag_ids: [])
   end
 
 end

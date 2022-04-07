@@ -14,15 +14,12 @@ header{
     padding: 20px;
     color: #5d627b;
     background-color: #efe8d8;
-    border: solid #5d627b;
 }
 
 .tag{
     width: 50%;
     margin: 10px auto;
     padding: 20px;
-    border: solid;
-    border-color: #5d627b;
     color: #5d627b;
     background-color: #efe8d8;
 }
@@ -67,5 +64,24 @@ h3 {
 
 .pagination {
     justify-content: center;
-  }
-  
+}
+
+.star-rating {
+    position: relative;
+    display: inline-block;
+    width: 5em;
+    height: 1em;
+    font-size: 25px;
+}
+.star-rating-front {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #ffcc33;
+}
+.star-rating-back {
+    display: inline-block;
+    color: #ccc;
+}

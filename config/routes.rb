@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   
   root 'items#home'
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users, :only => [:index]
   resources :users, only: [:show] 
   resources :messages, :only => [:create, :index]

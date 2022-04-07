@@ -65,3 +65,10 @@ gem 'kaminari'
 group :production do
   gem 'pg'
 end
+
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+
+gem 'hirb'
+gem 'hirb-unicode'
