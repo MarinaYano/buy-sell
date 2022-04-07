@@ -1,0 +1,5 @@
+class AddOverallToItems < ActiveRecord::Migration[6.1]
+  def change
+    add_column :items, :overall, :integer
+  end
+end

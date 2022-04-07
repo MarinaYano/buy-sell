@@ -25,13 +25,15 @@
       <div class="header-list">
       <ul>
         <li>
-        <a href="/users/sign_up" class="btn-flat-border-a">新規登録</a>
-        <a href="/users/sign_in" class="btn-flat-border">ログイン</a>
-        <a href="/items" class="btn-flat-border">アイテム一覧</a>
         <% if user_signed_in? %>
         <a href="/items/new" class="btn-flat-border">投稿する</a>
         <%= link_to "マイページへ", user_path(current_user.id), class: "btn-flat-border" %>
         <%= link_to "ログアウト", destroy_user_session_path, :method => :delete, class: "btn-flat-border" %>
+        <a href="/items" class="btn-flat-border">アイテム一覧</a>
+        <% else %>
+        <a href="/users/sign_up" class="btn-flat-border-a">新規登録</a>
+        <a href="/users/sign_in" class="btn-flat-border">ログイン</a>
+        <a href="/items" class="btn-flat-border">アイテム一覧</a>   
         <% end %>
       </ul>
       </div>

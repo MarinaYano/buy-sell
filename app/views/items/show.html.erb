@@ -1,13 +1,14 @@
 <h1>アイテム詳細</h1>
 <h3></h3>
-<div class="item">
-    <%= @item.image %>
-    <p><%= @item.post_genre %></p>
-    <p><%= @item.item_genre %></p>
-    <p><%= @item.price %></p>
-    <p><%= @item.status %></p>
-    <p><%= @item.memo %></p>
-    <p><%= @item.created_at %></p>
+<div class="item-info">
+      <p><%= @item.post_genre %></p>
+      <p><%= @item.item_genre %></p>
+      <p><%= @item.price %></p>
+      <p><%= @item.status %></p>
+      <p><%= @item.memo %></p>
+      <p><%= @item.created_at %></p>
+
+</div>
   
 
     <% if user_signed_in? %>
@@ -23,7 +24,7 @@
         <% else %>
               <i class="far fa-heart"></i><%= @item.likes.count %>
     <% end %>
-</div>
+
 
 <% @item.tags.each do |tag| %>
   <span><%= tag.name %></span>

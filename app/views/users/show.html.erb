@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "users_show", :media => "all" %>
 
-<h1>マイページ</h1>
+<h1>ユーザー情報</h1>
 <% if current_user.id == @user.id %>
   <%= link_to "編集する", edit_user_registration_path %>
 <% end %>
