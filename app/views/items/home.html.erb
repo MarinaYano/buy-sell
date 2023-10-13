@@ -1,47 +1,6 @@
 <%= stylesheet_link_tag "home", :media => "all" %>
 
 
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
-    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
-    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/assets/light.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Feature 1</h5>
-        <p>自分の住むエリアでアイテムを取引するので大きい荷物も～</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="/assets/book.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Feature 2</h5>
-        <p>出品されたものにお探しのものがなければ自分から探し中のアイテム投稿ができる</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="/assets/shelf.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Feature 3</h5>
-        <p>期間を決めた貸し出しなども選べます</p>
-      </div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </a>
-</div>
-
-
-
 <div class="research">
     <h3>投稿を検索</h3>
   
@@ -51,5 +10,65 @@
     <% end %>
 </div>
 
+<div class="title">
+<h3>アイテム一覧</h3>
+</div>
 
+<div class="items-container">
+
+
+  <% @items.each do |t| %>
+    <div class="item">
+      <%= image_tag t.image_url, size: "250x200" if t.image? %>
+      <div class="item-main">
+        <%= t.user.email %>
+        <%= t.post_genre %>
+        <%= t.item_genre %>
+        <%= t.price %>
+        <%= t.status %>
+        <%= t.memo %>
+      </div>
+
+      <div>
+      <h2>総合評価：
+      <span class="star-rating">
+        <span class="star-rating-front" style="width: <%= getPercent(t.overall) %>%;">★★★★★</span>
+        <span class="star-rating-back">★★★★★</span>
+      </span> 
+      </h2>
+      </div>
+      
+      <% if user_signed_in? %>
+          <% if current_user.already_liked?(t) %>
+              <%= link_to item_like_path(id: t.id, item_id: t.id), method: :delete do %>
+                <i class="fas fa-heart"></i><%= t.likes.count %>
+              <% end %>
+            <% else %>
+              <%= link_to item_likes_path(id: t.id, item_id: t.id), method: :post do %>
+                <i class="far fa-heart"></i><%= t.likes.count %>
+              <% end %>
+          <% end %>
+        <% else %>
+          <i class="far fa-heart"></i><%= t.likes.count %>
+      <% end %>
+
+      <%= t.created_at %>
+      <%= link_to "詳細へ", item_path(t.id) %>
+      <% if user_signed_in? && current_user.id == t.user_id %>  
+        <%= link_to "編集する", edit_item_path(t.id) %>
+        <%= button_to "削除する", item_path(t.id), method: :delete %>
+      <% end %>
+      
+    </div>
+  <% end %>
+  
+  <% @rank_items.each do |t| %>
+  <% end %>
+</div>
+
+
+
+<div class="paginate">
+  <%= paginate @items, class: 'page' %>
+</div>
 

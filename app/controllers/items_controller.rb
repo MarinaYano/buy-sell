@@ -75,6 +75,42 @@ class ItemsController < ApplicationController
     redirect_to action: :index
   end
 
+  def home
+    @items = Item.all.page(params[:page]).per(5)
+    @tags = Tag.all
+    
+    #フリーワード検索
+    if params[:search] == nil
+      @items= Item.all
+    elsif params[:search] == ''
+      @items= Item.all
+    else
+      #部分検索
+      search = params[:search]
+        @items = Item.joins(:user).where("post_genre LIKE ? OR memo LIKE ?", "%#{search}%", "%#{search}%")
+    end
+
+    # タグ機能
+    if params[:tag_ids]
+      @items = []
+      params[:tag_ids].each do |key, value|
+        if value == "1"
+          tag_items = Tag.find_by(name: key).items
+          @items = @items.empty? ? tag_items : @items & tag_items
+        end
+      end
+    end
+
+    if params[:tag]
+      Tag.create(name: params[:tag])
+    end
+
+    @rank_items = Item.all.sort {|a,b| b.liked_users.count <=> a.liked_users.count}
+
+    @items = @items.page(params[:page]).per(5)
+  end
+
+
 
   private
   def item_params
